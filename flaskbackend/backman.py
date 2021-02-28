@@ -12,5 +12,3 @@ def home():
 def data():
     json_return = [{"start":"Voss", "end": "Bergen"}]
     return jsonify(json_return)
-
-app.run()
