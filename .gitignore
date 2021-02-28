@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.idea/blaatur-backend.iml
+.idea/misc.xml
+.idea/workspace.xml
