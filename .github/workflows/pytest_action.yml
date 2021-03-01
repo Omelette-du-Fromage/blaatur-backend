@@ -23,8 +23,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.6, 3.7, 3.8]
-        poetry-version: [1.0, 1.1.2]
+        python-version: [3.9]
+        poetry-version: [1.1.2]
         os: [ubuntu-18.04, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
@@ -32,8 +32,6 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Blaatur testing
-        uses: Omelette-du-Fromage/blaatur-backend@main
       - name: Run image
         uses: abatilo/actions-poetry@v2.0.0
       - name: Actual testing
