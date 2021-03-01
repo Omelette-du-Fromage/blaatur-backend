@@ -8,6 +8,8 @@ authors = ["Zylvian <33404765+Zylvian@users.noreply.github.com>"]
 python = "^3.9"
 Flask = "^1.1.2"
 gunicorn = "^20.0.4"
+Flask-Cors = "^3.0.10"
+pytest = "^6.2.2"
 
 [tool.poetry.dev-dependencies]
 
