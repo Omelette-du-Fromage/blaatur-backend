@@ -33,7 +33,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Blaatur testing
-        uses: Omelette-du-Fromage/blaatur-backend@flask
+        uses: Omelette-du-Fromage/blaatur-backend@main
       - name: Run image
         uses: abatilo/actions-poetry@v2.0.0
       - name: Actual testing
