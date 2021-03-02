@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5726d182-8d46-46a9-873a-bb13b9794f42" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/pytest_action.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/pytest_action.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_api.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +133,7 @@
       <workItem from="1614683122613" duration="347000" />
       <workItem from="1614683605105" duration="1108000" />
       <workItem from="1614684844946" duration="1169000" />
-      <workItem from="1614686321714" duration="1097000" />
+      <workItem from="1614686321714" duration="1390000" />
     </task>
     <servers />
   </component>

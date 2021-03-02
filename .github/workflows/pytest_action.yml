@@ -5,8 +5,8 @@ name: Flask Pytest man
 # Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  #push:
-    #branches: [ flask ]
+  push:
+    branches: [ main ]
   workflow_dispatch:
     inputs:
       logLevel:
@@ -34,7 +34,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Run image
         uses: abatilo/actions-poetry@v2.0.0
-      - name: Install dependencies
+      - name: Install dependencies and run tests
         run: |
           poetry install
           poetry run pytest
