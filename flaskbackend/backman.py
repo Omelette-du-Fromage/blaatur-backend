@@ -1,6 +1,5 @@
 import flask
 from flask import jsonify, request
-import flask_cors
 from flask_cors import CORS, cross_origin
 
 app = flask.Flask(__name__)
