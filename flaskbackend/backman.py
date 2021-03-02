@@ -1,5 +1,6 @@
 import flask
-from flask import jsonify
+from flask import jsonify, request
+import flask_cors
 from flask_cors import CORS, cross_origin
 
 app = flask.Flask(__name__)
@@ -20,3 +21,9 @@ def data():
     # Enable Access-Control-Allow-Origin
     #.headers.add("Access-Control-Allow-Origin", "*")
     return response
+
+@app.route('/start', methods=['GET'])
+def startingPoint():
+    start = request.args.get('start')
+    print(start)
+    return jsonify([{"start":start}])
