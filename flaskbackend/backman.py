@@ -15,12 +15,13 @@ cors = CORS(app)
 def home():
     return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for distant reading of science fiction novels.</p>"
 
-@app.route('/testing', methods=['GET'])
+@app.route('/testing', methods=['POST'])
 def data():
 # gets the "place" value from the HTTP body, defaults to Voss if none exists.
-    place = request.form.get('place', default='Voss')
+    place_from = request.form.get('place_from', default='Bergen')
+    place_to = request.form.get('place_to', default='Voss')
 
-    databack = entur_api.journey_getter(place)
+    databack = entur_api.journey_getter(place_to)
 
     response = databack
     return response
