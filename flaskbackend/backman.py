@@ -11,25 +11,26 @@ app.config["DEBUG"] = True
 
 cors = CORS(app)
 
-@app.route('/', methods=['GET'])
+
+@app.route("/", methods=["GET"])
 def home():
     return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for distant reading of science fiction novels.</p>"
 
-@app.route('/testing', methods=['POST'])
+
+@app.route("/testing", methods=["POST"])
 def data():
-# gets the "place" value from the HTTP body, defaults to Voss if none exists.
-    place_from = request.form.get('place_from', default='Bergen')
-    place_to = request.form.get('place_to', default='Voss')
+    # gets the "place" value from the HTTP body, defaults to Voss if none exists.
+    place_from = request.form.get("place_from", default="Bergen")
+    place_to = request.form.get("place_to", default="Voss")
 
     databack = entur_api.journey_getter(place_to)
 
     response = databack
     return response
 
-@app.route('/start', methods=['GET'])
-def startingPoint():
-    start = request.args.get('start')
-    print(start)
-    return jsonify([{"start":start}])
-    
 
+@app.route("/start", methods=["GET"])
+def startingPoint():
+    start = request.args.get("start")
+    print(start)
+    return jsonify([{"start": start}])
