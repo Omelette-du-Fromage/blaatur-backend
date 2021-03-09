@@ -15,7 +15,7 @@ def journey_getter(place_to: str) -> dict:
         "query": entur_query,
         "variables": {
             "frommann": "NSR:StopPlace:30810",  # Bergen Stasjon bus stop
-            "tomann": place_getter(place_to),
+            "tomann": place_to,
         },
     }
 
@@ -24,7 +24,7 @@ def journey_getter(place_to: str) -> dict:
     return x
 
 
-def place_getter(name: str) -> str:
+def place_getter(name):
     """
     Uses EnTur's "autocomplete" api to fetch stops from requested place.
     :param name: place we want to get Place ID from.
@@ -39,10 +39,12 @@ def place_getter(name: str) -> str:
     # Bus stations /= bus stops
     acceptable_results = ["busStation"]
 
+    d = dict()
+
     for result in x["features"]:
         categories = result["properties"]["category"]
-
         if any(cat in acceptable_results for cat in categories):
-            re = result["properties"]["id"] + 's ' + result["properties"]["name"]
-            print(re)
-            return re
+            d['id'] = result["properties"]["id"]
+            d['name'] = result["properties"]["name"]
+            #print(result["properties"]["id"] + " ------")
+            return d

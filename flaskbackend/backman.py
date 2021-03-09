@@ -26,11 +26,11 @@ def data():
 
     place_from = request.form.get("place_from")
 
-    databack = entur_api.journey_getter("Voss")
+    x = entur_api.place_getter(place_from)
 
-    print(entur_api.place_getter(place_from))
+    databack = entur_api.journey_getter(x['id'])
 
-    response = databack
+    response = databack + x['name']
     return response
 
 
