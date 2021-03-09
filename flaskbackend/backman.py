@@ -28,6 +28,8 @@ def data():
 
     databack = entur_api.journey_getter("Voss")
 
+    print(entur_api.place_getter(place_from))
+
     response = databack
     return response
 
