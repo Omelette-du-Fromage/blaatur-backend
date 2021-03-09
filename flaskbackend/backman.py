@@ -20,16 +20,13 @@ def home():
 
 @app.route("/testing", methods=["POST"])
 def data():
-    # gets the "place" value from the HTTP body, defaults to Voss if none exists.
+    # gets the "place" value from the HTTP body
     destination = ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"]
     chosen = random.choice(destination)
 
     place_from = request.form.get("place_from", default="Bergen")
-    #place_to = request.form.get("place_to", default="Voss")
 
-    #databack = entur_api.journey_getter(place_to)
-
-    databack = entur_api.journey_getter(chosen)
+    databack = entur_api.journey_getter("Voss")
 
     response = databack
     return response
