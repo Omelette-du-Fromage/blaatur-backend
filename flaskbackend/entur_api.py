@@ -41,5 +41,8 @@ def place_getter(name: str) -> str:
 
     for result in x["features"]:
         categories = result["properties"]["category"]
+
         if any(cat in acceptable_results for cat in categories):
-            return result["properties"]["id"]
+            re = result["properties"]["id"] + 's ' + result["properties"]["name"]
+            print(re)
+            return re

@@ -24,7 +24,7 @@ def data():
     destination = ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"]
     chosen = random.choice(destination)
 
-    place_from = request.form.get("place_from", default="Bergen")
+    place_from = request.form.get("place_from")
 
     databack = entur_api.journey_getter("Voss")
 
