@@ -18,6 +18,7 @@ def journey_getter(place_from: str, place_to: str) -> dict:
             "tomann": place_to,
         },
     }
+    
 
     r = api_requests.post(entur_journey_url, json=body, headers=safe_header)
     x = r.json()
@@ -46,5 +47,4 @@ def place_getter(name):
         if any(cat in acceptable_results for cat in categories):
             d['id'] = result["properties"]["id"]
             d['name'] = result["properties"]["name"]
-            #print(result["properties"]["id"] + " ------")
             return d

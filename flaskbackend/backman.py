@@ -24,16 +24,14 @@ def data():
     destination = ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"]
     chosen = random.choice(destination)
     
-    place_from = request.form.get("place_from")
+    place_from = request.form.get("place_from") # sjekk dette igjen
 
     id_place_from = entur_api.place_getter(place_from)
     id_place_to = entur_api.place_getter(chosen)
-    
-    print(id_place_from)
+
     if (id_place_from):
         databack = entur_api.journey_getter(id_place_from['id'], id_place_to['id'])
-        databack['name'] = id_place_from['name']
-
+        databack['name'] = id_place_to['name']
         return databack
     else:
         return "Record not found", 400
