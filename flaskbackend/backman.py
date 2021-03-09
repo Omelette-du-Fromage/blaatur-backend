@@ -10,8 +10,8 @@ from flaskbackend.constants import entur_journey_url, entur_query
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-cors = CORS(app)
-
+CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route("/", methods=["GET"])
 def home():
@@ -23,15 +23,16 @@ def data():
     # gets the "place" value from the HTTP body
     destination = ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"]
     chosen = random.choice(destination)
-
+    
     place_from = request.form.get("place_from")
 
     x = entur_api.place_getter(place_from)
 
     databack = entur_api.journey_getter(x['id'])
-
+    
     response = databack + x['name']
-    return response
+    
+    return "rep"
 
 
 @app.route("/start", methods=["GET"])
