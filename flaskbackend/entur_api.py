@@ -5,7 +5,7 @@ from flaskbackend.constants import *
 safe_header = {"ET-Client-Name": "blaatur-api", "Content-Type": "application/json"}
 
 
-def journey_getter(place_to: str) -> dict:
+def journey_getter(place_from: str, place_to: str) -> dict:
     """
     Uses EnTur's "journey planner" api to fetch a trip from place to place.
     :param place_to:
@@ -14,7 +14,7 @@ def journey_getter(place_to: str) -> dict:
     body = {
         "query": entur_query,
         "variables": {
-            "frommann": "NSR:StopPlace:30810",  # Bergen Stasjon bus stop
+            "frommann": place_from,
             "tomann": place_to,
         },
     }

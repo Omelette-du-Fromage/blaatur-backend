@@ -26,13 +26,17 @@ def data():
     
     place_from = request.form.get("place_from")
 
-    x = entur_api.place_getter(place_from)
+    id_place_from = entur_api.place_getter(place_from)
+    id_place_to = entur_api.place_getter(chosen)
+    
+    print(id_place_from)
+    if (id_place_from):
+        databack = entur_api.journey_getter(id_place_from['id'], id_place_to['id'])
+        databack['name'] = id_place_from['name']
 
-    databack = entur_api.journey_getter(x['id'])
-    
-    response = databack + x['name']
-    
-    return "rep"
+        return databack
+    else:
+        return "Record not found", 400
 
 
 @app.route("/start", methods=["GET"])
