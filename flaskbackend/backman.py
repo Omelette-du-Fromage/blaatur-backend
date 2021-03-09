@@ -25,7 +25,7 @@ def data():
     chosen = random.choice(destination)
 
     place_from = request.form.get("place_from", default="Bergen")
-    place_to = request.form.get("place_to", default="Voss")
+    #place_to = request.form.get("place_to", default="Voss")
 
     #databack = entur_api.journey_getter(place_to)
 
