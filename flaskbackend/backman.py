@@ -21,18 +21,18 @@ def home():
 @app.route("/testing", methods=["POST"])
 def data():
     # gets the "place" value from the HTTP body
-    destination = ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"]
-    chosen = random.choice(destination)
+    places_to = ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"]
+    place_to = random.choice(places_to)
 
     data = request.get_json()
     place_from = data.get("place_from", '')
 
-    id_place_from = entur_api.place_getter(place_from)
-    id_place_to = entur_api.place_getter(chosen)
+    id_and_station_name_place_from = entur_api.place_getter(place_from)
+    id_and_station_name_place_to = entur_api.place_getter(place_to)
 
-    if (id_place_from):
-        databack = entur_api.journey_getter(id_place_from['id'], id_place_to['id'])
-        databack['name'] = id_place_to['name']
+    if (id_and_station_name_place_from):
+        databack = entur_api.journey_getter(id_and_station_name_place_from['id'], id_and_station_name_place_to['id'])
+        databack['name'] = id_and_station_name_place_to['name']
         return databack
     else:
         return "Record not found", 400
