@@ -23,8 +23,12 @@ def data():
     # gets the "place" value from the HTTP body
     destination = ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"]
     chosen = random.choice(destination)
-    
-    place_from = request.form.get("place_from") # sjekk dette igjen
+
+    data = request.get_json()
+    place_from = data.get("place_from", '')
+
+    #place_from = request.form.get("place_from") # sjekk dette igjen
+    print(place_from)
 
     id_place_from = entur_api.place_getter(place_from)
     id_place_to = entur_api.place_getter(chosen)
@@ -35,6 +39,7 @@ def data():
         return databack
     else:
         return "Record not found", 400
+
 
 
 @app.route("/start", methods=["GET"])
