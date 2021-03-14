@@ -27,9 +27,6 @@ def data():
     data = request.get_json()
     place_from = data.get("place_from", '')
 
-    #place_from = request.form.get("place_from") # sjekk dette igjen
-    print(place_from)
-
     id_place_from = entur_api.place_getter(place_from)
     id_place_to = entur_api.place_getter(chosen)
 
