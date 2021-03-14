@@ -22,8 +22,9 @@ def home():
 @app.route("/testing", methods=["POST"])
 def data():
     # gets the "place" value from the HTTP body
-    data = request.get_json()
-    place_from = data.get("place_from", '')
+    data_from_frontend = request.get_json()
+    print(type(data_from_frontend))
+    place_from = data_from_frontend.get("place_from", "")
 
     places_to = ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"]
     place_to = findRandomPlaceTo(place_from, places_to)
