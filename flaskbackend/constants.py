@@ -1,4 +1,4 @@
-entur_journey_url = "https://api.entur.io/journey-planner/v2/graphql"
+entur_journey_url = "https://api.entur.io/journey-planner/v3/graphql"
 
 entur_autocomp_url = "https://api.entur.io/geocoder/v1/autocomplete"
 
