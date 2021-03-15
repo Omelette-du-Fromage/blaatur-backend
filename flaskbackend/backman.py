@@ -1,3 +1,5 @@
+import logging
+
 import flask
 from flask import jsonify, request
 from flask_cors import CORS, cross_origin
@@ -23,7 +25,6 @@ def home():
 def data():
     # gets the "place" value from the HTTP body
     data_from_frontend = request.get_json()
-    print(type(data_from_frontend))
     place_from = data_from_frontend.get("place_from", "")
 
     places_to = ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"]
@@ -31,9 +32,12 @@ def data():
 
     id_and_station_name_place_from = entur_api.place_getter(place_from)
     id_and_station_name_place_to = entur_api.place_getter(place_to)
+    print(f'From: {id_and_station_name_place_from}')
+    print(f'To: {id_and_station_name_place_to}')
 
-    if (id_and_station_name_place_from):
-        databack = entur_api.journey_getter(id_and_station_name_place_from['id'], id_and_station_name_place_to['id'])
+    if id_and_station_name_place_from and id_and_station_name_place_to:
+        databack = entur_api.journey_getter(id_and_station_name_place_from['id'],
+                                            id_and_station_name_place_to['id'])
         databack['name'] = id_and_station_name_place_to['name']
         return databack
     else:
@@ -43,7 +47,6 @@ def data():
 @app.route("/start", methods=["GET"])
 def startingPoint():
     start = request.args.get("start")
-    print(start)
     return jsonify([{"start": start}])
 
 
@@ -53,4 +56,5 @@ def findRandomPlaceTo(place_from, places_to_go):
     if place_to_candidate == place_from:
         findRandomPlaceTo(place_from, places_to_go)
     else:
+        print(f"We're going to {place_to_candidate}!")
         return place_to_candidate

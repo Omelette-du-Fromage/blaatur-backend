@@ -38,7 +38,7 @@ def place_getter(name):
 
     # Currently only allows places with bus stations, e.g Bergen Stasjon, Voss Stasjon
     # Bus stations /= bus stops
-    acceptable_results = ["busStation"]
+    acceptable_results = ['busStation', 'railStation', 'onstreetBus']
 
     d = dict()
 
