@@ -5,7 +5,7 @@ from flaskbackend.constants import *
 safe_header = {"ET-Client-Name": "blaatur-api", "Content-Type": "application/json"}
 
 
-def journey_getter(place_to: str) -> dict:
+def journey_getter(place_from: str, place_to: str) -> dict:
     """
     Uses EnTur's "journey planner" api to fetch a trip from place to place.
     :param place_to:
@@ -14,17 +14,18 @@ def journey_getter(place_to: str) -> dict:
     body = {
         "query": entur_query,
         "variables": {
-            "frommann": "NSR:StopPlace:30810",  # Bergen Stasjon bus stop
-            "tomann": place_getter(place_to),
+            "frommann": place_from,
+            "tomann": place_to,
         },
     }
+    
 
     r = api_requests.post(entur_journey_url, json=body, headers=safe_header)
     x = r.json()
     return x
 
 
-def place_getter(name: str) -> str:
+def place_getter(name):
     """
     Uses EnTur's "autocomplete" api to fetch stops from requested place.
     :param name: place we want to get Place ID from.
@@ -39,7 +40,11 @@ def place_getter(name: str) -> str:
     # Bus stations /= bus stops
     acceptable_results = ["busStation"]
 
+    d = dict()
+
     for result in x["features"]:
         categories = result["properties"]["category"]
         if any(cat in acceptable_results for cat in categories):
-            return result["properties"]["id"]
+            d['id'] = result["properties"]["id"]
+            d['name'] = result["properties"]["name"]
+            return d
