@@ -46,9 +46,7 @@ def data():
 @app.route("/mockPlaceTo", methods=["POST"])
 def dataMock():
     # gets the "place" value from the HTTP body
-    data_from_frontend = request.get_json()
-    place_from = data_from_frontend.get("place_from", "")
-
+    place_from = "Bergen"
     place_to = "Florø"
 
     id_and_station_name_place_from = entur_api.place_getter(place_from)
