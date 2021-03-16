@@ -14,3 +14,9 @@ def testFindRandomPlaceTo():
     places_to_go = ["Bergen"]
     assert backman.findRandomPlaceTo(place_from, places_to_go) is None
 
+def test_FindRandomPlaceTo_should_return_place_to_when_availiable():
+    app.testing = True 
+    place_from = "Arendal Busstasjon"
+    places_to_go = ["Bergen", "Arendal"]
+    assert backman.findRandomPlaceTo(place_from, places_to_go) == "Bergen"
+

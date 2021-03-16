@@ -58,5 +58,4 @@ def findRandomPlaceTo(place_from, places_to_go):
     elif place_to_candidate in place_from:
         findRandomPlaceTo(place_from, places_to_go)
     else:
-        print(f"We're going to {place_to_candidate}!")
         return place_to_candidate
