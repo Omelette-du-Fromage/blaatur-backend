@@ -56,6 +56,7 @@ def findRandomPlaceTo(place_from, places_to_go):
     if(len(places_to_go) == 1 and (place_to_candidate in place_from)):
         return
     elif place_to_candidate in place_from:
-        findRandomPlaceTo(place_from, places_to_go)
+        return findRandomPlaceTo(place_from, places_to_go)
     else:
+        print(place_to_candidate)
         return place_to_candidate
