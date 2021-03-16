@@ -53,7 +53,9 @@ def startingPoint():
 def findRandomPlaceTo(place_from, places_to_go):
     """Find a random place to go from list. If place_to and place_from is equal, find a new place."""
     place_to_candidate = random.choice(places_to_go)
-    if place_to_candidate == place_from:
+    if(len(places_to_go) == 1 and (place_to_candidate in place_from)):
+        return
+    elif place_to_candidate in place_from:
         findRandomPlaceTo(place_from, places_to_go)
     else:
         print(f"We're going to {place_to_candidate}!")
