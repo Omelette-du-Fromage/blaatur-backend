@@ -44,7 +44,7 @@ def data():
         return "Record not found", 400
 
 @app.route("/mockPlaceTo", methods=["POST"])
-def data():
+def dataMock():
     # gets the "place" value from the HTTP body
     data_from_frontend = request.get_json()
     place_from = data_from_frontend.get("place_from", "")
