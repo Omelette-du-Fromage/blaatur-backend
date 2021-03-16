@@ -43,6 +43,10 @@ def data():
     else:
         return "Record not found", 400
 
+def dataHasTrip(trip):
+    return len(trip['data']['trip']['tripPatterns']) != 0
+
+
 @app.route("/mockPlaceTo", methods=["POST"])
 def dataMock():
     # gets the "place" value from the HTTP body
