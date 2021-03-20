@@ -24,6 +24,9 @@ entur_query = """query JarleMann($tomann: String!, $frommann: String!){
             fromPlace {
               name
             }
+            toPlace {
+              name
+            }
             line {
               id
               publicCode

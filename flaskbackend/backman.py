@@ -84,23 +84,23 @@ def findRandomPlaceTo(place_from, places_to_go):
         return place_to_candidate
 
 
-def aaaa():
-    # gets the "place" value from the HTTP body
-    place_from = "Bergen"
-    place_to = "Florø"
-
-    id_and_station_name_place_from = entur_api.place_getter(place_from)
-    id_and_station_name_place_to = entur_api.place_getter(place_to)
-    print(f'From: {id_and_station_name_place_from}')
-    print(f'To: {id_and_station_name_place_to}')
-
-
-    if id_and_station_name_place_from and id_and_station_name_place_to:
-        databack = entur_api.journey_getter(id_and_station_name_place_from['id'],
-                                            id_and_station_name_place_to['id'])
-        databack['name'] = id_and_station_name_place_to['name']
-        return databack
-    else:
-        return "Record not found", 400
-
-print(aaaa())
+# def aaaa():
+#     # gets the "place" value from the HTTP body
+#     place_from = "Bergen"
+#     place_to = "Florø"
+#
+#     id_and_station_name_place_from = entur_api.place_getter(place_from)
+#     id_and_station_name_place_to = entur_api.place_getter(place_to)
+#     print(f'From: {id_and_station_name_place_from}')
+#     print(f'To: {id_and_station_name_place_to}')
+#
+#
+#     if id_and_station_name_place_from and id_and_station_name_place_to:
+#         databack = entur_api.journey_getter(id_and_station_name_place_from['id'],
+#                                             id_and_station_name_place_to['id'])
+#         databack['name'] = id_and_station_name_place_to['name']
+#         return databack
+#     else:
+#         return "Record not found", 400
+#
+# print(aaaa())
