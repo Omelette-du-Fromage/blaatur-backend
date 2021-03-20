@@ -7,6 +7,7 @@ entur_query = """query JarleMann($tomann: String!, $frommann: String!){
     from: {place: $frommann}
     to: {place : $tomann}
     numTripPatterns: 1
+    searchWindow: 1440
   )
 
 #### Requested fields
@@ -15,16 +16,25 @@ entur_query = """query JarleMann($tomann: String!, $frommann: String!){
       startTime
       duration
       walkDistance
-
           legs {
+            expectedStartTime
+            expectedEndTime
             mode
             distance
+            fromPlace {
+              name
+            }
             line {
               id
               publicCode
               authority{
                 name
               }
+              presentation {
+              colour
+              textColour
+          }
+          description
             }
           }
     }

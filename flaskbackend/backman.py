@@ -27,8 +27,8 @@ def data():
     data_from_frontend = request.get_json()
     place_from = data_from_frontend.get("place_from", "")
 
-    places_to = ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"]
-    place_to = findRandomPlaceTo(place_from, places_to)
+    destination_candidates = ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"]
+    place_to = findRandomPlaceTo(place_from, destination_candidates)
 
     id_and_station_name_place_from = entur_api.place_getter(place_from)
     id_and_station_name_place_to = entur_api.place_getter(place_to)
@@ -82,3 +82,25 @@ def findRandomPlaceTo(place_from, places_to_go):
     else:
         print(place_to_candidate)
         return place_to_candidate
+
+
+def aaaa():
+    # gets the "place" value from the HTTP body
+    place_from = "Bergen"
+    place_to = "Florø"
+
+    id_and_station_name_place_from = entur_api.place_getter(place_from)
+    id_and_station_name_place_to = entur_api.place_getter(place_to)
+    print(f'From: {id_and_station_name_place_from}')
+    print(f'To: {id_and_station_name_place_to}')
+
+
+    if id_and_station_name_place_from and id_and_station_name_place_to:
+        databack = entur_api.journey_getter(id_and_station_name_place_from['id'],
+                                            id_and_station_name_place_to['id'])
+        databack['name'] = id_and_station_name_place_to['name']
+        return databack
+    else:
+        return "Record not found", 400
+
+print(aaaa())
