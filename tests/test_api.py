@@ -37,4 +37,3 @@ def test_no_trip():
              "name": "Florø rutebilstasjon"
             }
     assert backman.dataHasTrip(data) == False
-    
