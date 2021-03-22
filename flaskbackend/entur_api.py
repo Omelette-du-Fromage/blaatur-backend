@@ -44,8 +44,8 @@ def place_getter(name):
     """
     params = {"text": name, "size": "10", "lang": "en"}
 
-    r = api_requests.get(entur_autocomp_url, params=params, headers=safe_header)
-    x = r.json()
+    response = api_requests.get(entur_autocomp_url, params=params, headers=safe_header)
+    entur_json = response.json()
 
     # Currently only allows places with bus stations, e.g Bergen Stasjon, Voss Stasjon
     # Bus stations /= bus stops
@@ -53,8 +53,10 @@ def place_getter(name):
 
     d = dict()
 
-    for result in x["features"]:
+    for result in entur_json["features"]:
         categories = result["properties"]["category"]
+
+        # Doesn't the first predicate (any()) turn out true if bus or train appears once in a trip?
         if any(cat in acceptable_results for cat in categories):
             # d['id'] = result["properties"]["id"]
             # d['name'] = result["properties"]["name"]
