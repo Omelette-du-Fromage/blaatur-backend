@@ -27,13 +27,13 @@ def journey_getter(place_from: str, place_to: str, startDate=datetime.now()) -> 
             },
         }
 
-        r = api_requests.post(entur_journey_url, json=body, headers=safe_header)
-        x = r.json()
-        if not x['data']['trip']['tripPatterns']:
-            date_data = x['data']['trip']['metadata']['nextDateTime']
+        response = api_requests.post(entur_journey_url, json=body, headers=safe_header)
+        trip_json = response.json()
+        if not trip_json['data']['trip']['tripPatterns']:
+            date_data = trip_json['data']['trip']['metadata']['nextDateTime']
             startDate = parser.parse(date_data)
         else:
-            return x
+            return trip_json
 
 
 def place_getter(name):

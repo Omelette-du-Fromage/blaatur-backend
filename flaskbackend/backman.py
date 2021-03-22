@@ -40,6 +40,9 @@ def data():
     if id_place_from and id_place_to:
         databack = entur_api.journey_getter(id_place_from,
                                             id_place_to)
+
+        # Unpacking JSON so that we return only the first trip pattern
+        databack = databack['data']['trip']['tripPatterns'][0]
         return databack
     else:
         return "Record not found", 400

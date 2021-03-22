@@ -21,12 +21,10 @@ entur_query = """query JarleMann($tomann: String!, $frommann: String!, $startDat
     tripPatterns {
       startTime
       duration
-      walkDistance
           legs {
             expectedStartTime
             expectedEndTime
             mode
-            distance
             fromPlace {
               name
             }
@@ -34,16 +32,9 @@ entur_query = """query JarleMann($tomann: String!, $frommann: String!, $startDat
               name
             }
             line {
-              id
-              publicCode
               authority{
                 name
               }
-              presentation {
-              colour
-              textColour
-          }
-          description
             }
           }
     }
