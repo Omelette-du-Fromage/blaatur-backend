@@ -4,8 +4,6 @@ entur_autocomp_url = "https://api.entur.io/geocoder/v1/autocomplete"
 
 entur_query = """query JarleMann($tomann: String!, $frommann: String!, $startDate: DateTime){
   trip(
-    #modes:  [foot, tram, metro, rail, bus, water, cableway, lift, funicular, transit, coach, air]
-    
     modes: {
       accessMode: foot
       transportModes: [{transportMode: bus}, 
@@ -18,6 +16,8 @@ entur_query = """query JarleMann($tomann: String!, $frommann: String!, $startDat
     from: {place: $frommann}
     to: {place : $tomann}
     dateTime: $startDate
+    
+    
     searchWindow: 400
     numTripPatterns: 1
   )

@@ -31,6 +31,8 @@ def data():
     destination_candidates = ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"]
     place_to = findRandomPlaceTo(place_from, destination_candidates)
 
+    dest_blacklist: list = data_from_frontend.get("destinations_used", [])
+
     # Jeg refaktorerte dictet vi får tilbake, ettersom vi kan sende med "from" dataen i EnTur dataen.
     id_place_from = entur_api.place_getter(place_from)
     id_place_to = entur_api.place_getter(place_to)
@@ -38,11 +40,12 @@ def data():
     print(f'To: {id_place_to}')
 
     if id_place_from and id_place_to:
-        databack = entur_api.journey_getter(id_place_from,
+        entur_data = entur_api.journey_getter(id_place_from,
                                             id_place_to)
-
-        # Unpacking JSON so that we return only the first trip pattern
-        databack = databack['data']['trip']['tripPatterns'][0]
+        databack = {}
+        databack['trip'] = entur_data['data']['trip']['tripPatterns'][0]
+        databack['destinations_used'] = [place_to] + list(dest_blacklist)
+        print(databack)
         return databack
     else:
         return "Record not found", 400
