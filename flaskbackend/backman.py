@@ -31,14 +31,17 @@ def data():
     place_from = data_from_frontend.get("place_from", "")
     dest_blacklist: list = data_from_frontend.get("destinations_used", [])
     destination_candidates = ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"]
-    # Removes place_from from candidates
-    destination_candidates = [x for x in destination_candidates if x not in place_from]
+    # # Removes place_from from candidates
+    # destination_candidates = [x for x in destination_candidates if x not in place_from]
+
+    print(f'Dests: {destination_candidates}')
 
     # Checks if blacklist  == candiates
     if all(dest in dest_blacklist for dest in destination_candidates):
         dest_blacklist = []
     # Create whitelist based on blacklist.
     dest_whitelist = [dest for dest in destination_candidates if dest not in dest_blacklist]
+    print(f"Whitelist: {dest_whitelist}")
 
     place_to = findRandomPlaceTo(place_from, dest_whitelist)
     # if not place_to: # I don't like this, Sam.
@@ -99,10 +102,12 @@ def findRandomPlaceTo(place_from, dest_whitelist):
 
     place_to_candidate = random.choice(dest_whitelist)
 
-    if len(dest_whitelist) <= 1:
-        if place_to_candidate in place_from:
-            return
-    elif place_to_candidate in place_from:
+    # Can currently travel Bergen to Bergen lol but let's give it a shot.
+
+    # if len(dest_whitelist) <= 1:
+    #     if place_to_candidate in place_from:
+    #         return
+    if place_to_candidate in place_from:
         return findRandomPlaceTo(place_from, dest_whitelist)
     else:
         return place_to_candidate
