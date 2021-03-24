@@ -8,6 +8,12 @@ def test_api_start():
         rv = c.post("/testing",  json={"place_from": "Bergen"}, headers={"Content-Type": "application/json"})
         assert rv is not None
 
+# def test_list_addition():
+    # app.testing = True
+    # with app.test_client() as c:
+    #     rv = c.post("/testing",  json={"place_from": "Bergen"}, headers={"Content-Type": "application/json"})
+    #     assert rv is not None
+
 
 def test_find_random_place_to():
     app.testing = True
