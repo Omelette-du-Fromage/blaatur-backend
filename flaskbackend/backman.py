@@ -31,7 +31,13 @@ def data():
     place_from = data_from_frontend.get("place_from", "")
     dest_blacklist: list = data_from_frontend.get("destinations_used", [])
     destination_candidates = ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"]
-    place_to = findRandomPlaceTo(place_from, destination_candidates, dest_blacklist)
+    if all(dest in dest_blacklist for dest in dest_blacklist):
+        dest_blacklist = []
+    dest_whitelist = [dest for dest in destination_candidates if dest not in dest_blacklist]
+    while True:
+        place_to = findRandomPlaceTo(place_from, dest_whitelist)
+        if place_to:
+            break
 
     # Jeg refaktorerte dictet vi får tilbake, ettersom vi kan sende med "from" dataen i EnTur dataen.
     id_place_from = entur_api.place_getter(place_from)
@@ -46,7 +52,8 @@ def data():
         databack = {}
         databack['trip'] = entur_data['data']['trip']['tripPatterns'][0]
 
-        dest_blacklist.append(place_to)
+        if place_to not in dest_blacklist:
+            dest_blacklist.append(place_to)
         databack['destinations_used'] = dest_blacklist
         return databack
     else:
@@ -81,20 +88,17 @@ def startingPoint():
     return jsonify([{"start": start}])
 
 
-def findRandomPlaceTo(place_from, destination_candidates, dest_blacklist:list=[]):
+def findRandomPlaceTo(place_from, dest_whitelist):
     """Find a random place to go from list. If place_to and place_from is equal, find a new place."""
-    dest_whitelist = [dest for dest in destination_candidates if dest not in dest_blacklist]
+
     place_to_candidate = random.choice(dest_whitelist)
 
-    if(len(dest_whitelist) == 1 and (place_to_candidate in place_from)):
-        return
-
     if len(dest_whitelist) <= 1:
-        return findRandomPlaceTo(place_from, destination_candidates, [])
+        if place_to_candidate in place_from:
+            return
     elif place_to_candidate in place_from:
-        return findRandomPlaceTo(place_from, destination_candidates, dest_blacklist)
+        return findRandomPlaceTo(place_from, dest_whitelist)
     else:
-        print(place_to_candidate)
         return place_to_candidate
 
 
