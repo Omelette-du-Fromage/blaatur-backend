@@ -86,7 +86,7 @@ def findRandomPlaceTo(place_from, destination_candidates, dest_blacklist):
     dest_whitelist = [dest for dest in destination_candidates if dest not in dest_blacklist]
     place_to_candidate = random.choice(dest_whitelist)
 
-    if len(destination_candidates) <= 1:
+    if len(dest_whitelist) <= 1:
         return findRandomPlaceTo(place_from, destination_candidates, [])
     elif place_to_candidate in place_from:
         return findRandomPlaceTo(place_from, destination_candidates, dest_blacklist)
