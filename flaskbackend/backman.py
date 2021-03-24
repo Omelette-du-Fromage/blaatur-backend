@@ -81,10 +81,13 @@ def startingPoint():
     return jsonify([{"start": start}])
 
 
-def findRandomPlaceTo(place_from, destination_candidates, dest_blacklist):
+def findRandomPlaceTo(place_from, destination_candidates, dest_blacklist:list=[]):
     """Find a random place to go from list. If place_to and place_from is equal, find a new place."""
     dest_whitelist = [dest for dest in destination_candidates if dest not in dest_blacklist]
     place_to_candidate = random.choice(dest_whitelist)
+
+    if(len(dest_whitelist) == 1 and (place_to_candidate in place_from)):
+        return
 
     if len(dest_whitelist) <= 1:
         return findRandomPlaceTo(place_from, destination_candidates, [])
