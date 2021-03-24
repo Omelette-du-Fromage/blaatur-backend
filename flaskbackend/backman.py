@@ -31,13 +31,18 @@ def data():
     place_from = data_from_frontend.get("place_from", "")
     dest_blacklist: list = data_from_frontend.get("destinations_used", [])
     destination_candidates = ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"]
+    # Removes place_from from candidates
+    destination_candidates = [x for x in destination_candidates if x not in place_from]
+
+    # Checks if blacklist  == candiates
     if all(dest in dest_blacklist for dest in destination_candidates):
         dest_blacklist = []
+    # Create whitelist based on blacklist.
     dest_whitelist = [dest for dest in destination_candidates if dest not in dest_blacklist]
 
     place_to = findRandomPlaceTo(place_from, dest_whitelist)
-    if not place_to: # I don't like this, Sam.
-        place_to = findRandomPlaceTo(place_from, destination_candidates)
+    # if not place_to: # I don't like this, Sam.
+    #     place_to = findRandomPlaceTo(place_from, destination_candidates)
 
 
     # Jeg refaktorerte dictet vi får tilbake, ettersom vi kan sende med "from" dataen i EnTur dataen.
