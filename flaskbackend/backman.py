@@ -44,7 +44,8 @@ def data():
                                             id_place_to)
         databack = {}
         databack['trip'] = entur_data['data']['trip']['tripPatterns'][0]
-        databack['destinations_used'] = [place_to] + list(dest_blacklist)
+        dest_blacklist.append(place_to)
+        databack['destinations_used'] = dest_blacklist
         print(databack)
         return databack
     else:
