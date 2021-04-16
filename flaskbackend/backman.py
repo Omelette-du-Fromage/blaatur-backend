@@ -107,6 +107,8 @@ def findRandomPlaceTo(place_from, dest_whitelist, dest_blacklist):
     # if len(dest_whitelist) <= 1:
     #     if place_to_candidate in place_from:
     #         return
+    if place_to_candidate == place_from:
+        return place_to_candidate
     if place_to_candidate in dest_blacklist:
         return findRandomPlaceTo(place_from, dest_whitelist, dest_blacklist)
     else:
