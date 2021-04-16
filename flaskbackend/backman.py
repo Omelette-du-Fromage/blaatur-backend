@@ -43,7 +43,7 @@ def data():
     dest_whitelist = [dest for dest in destination_candidates if dest not in dest_blacklist]
     print(f"Whitelist: {dest_whitelist}")
 
-    place_to = findRandomPlaceTo(place_from, dest_whitelist)
+    place_to = findRandomPlaceTo(place_from, dest_whitelist, dest_blacklist)
     # if not place_to: # I don't like this, Sam.
     #     place_to = findRandomPlaceTo(place_from, destination_candidates)
 
@@ -97,7 +97,7 @@ def startingPoint():
     return jsonify([{"start": start}])
 
 
-def findRandomPlaceTo(place_from, dest_whitelist):
+def findRandomPlaceTo(place_from, dest_whitelist, dest_blacklist):
     """Find a random place to go from list. If place_to and place_from is equal, find a new place."""
 
     place_to_candidate = random.choice(dest_whitelist)
@@ -107,8 +107,8 @@ def findRandomPlaceTo(place_from, dest_whitelist):
     # if len(dest_whitelist) <= 1:
     #     if place_to_candidate in place_from:
     #         return
-    if place_to_candidate in place_from:
-        return findRandomPlaceTo(place_from, dest_whitelist)
+    if place_to_candidate in dest_blacklist:
+        return findRandomPlaceTo(place_from, dest_whitelist, dest_blacklist)
     else:
         return place_to_candidate
 

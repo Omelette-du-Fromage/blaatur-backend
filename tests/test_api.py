@@ -19,13 +19,13 @@ def test_find_random_place_to():
     app.testing = True
     place_from = "Bergen busstasjon"
     places_to_go = ["Bergen"]
-    assert backman.findRandomPlaceTo(place_from, places_to_go) is None
+    assert backman.findRandomPlaceTo(place_from, places_to_go, []) is not None
 
 def test_findRandomPlace_to_should_return_place_to_when_availiable():
     app.testing = True 
     place_from = "Arendal Busstasjon"
     places_to_go = ["Bergen", "Arendal"]
-    assert backman.findRandomPlaceTo(place_from, places_to_go) == "Bergen"
+    assert backman.findRandomPlaceTo(place_from, places_to_go, []) == "Arendal"
 
 def test_no_trip():
     app.testing = True
