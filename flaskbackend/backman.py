@@ -27,7 +27,6 @@ def data():
     # gets the "place" value from the HTTP body
     data_from_frontend = request.get_json()
 
-
     place_from = data_from_frontend.get("place_from", "")
     dest_blacklist: list = data_from_frontend.get("destinations_used", [])
     destination_candidates = removeAlreadyVisitedPlacesFromList(dest_blacklist, ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"])
@@ -42,6 +41,7 @@ def data():
     print(f'Dests: {destination_candidates}')
 
     place_to = findRandomPlaceTo(place_from, destination_candidates)
+
     # if not place_to: # I don't like this, Sam.
     #     place_to = findRandomPlaceTo(place_from, destination_candidates)
 
@@ -56,6 +56,8 @@ def data():
         entur_data = entur_api.journey_getter(id_place_from,
                                             id_place_to)
 
+        if (entur_data == None):
+            return "Record not found", 404
         databack = {}
         databack['trip'] = entur_data['data']['trip']['tripPatterns'][0]
 
@@ -98,11 +100,10 @@ def startingPoint():
 def findRandomPlaceTo(place_from, destination_candidates):
     """Find a random place to go from list. If place_to and place_from is equal, find a new place."""
     place_to_candidate = random.choice(destination_candidates)
-    # If "Arendal" in "Arendal Busstasjon"
     if place_to_candidate in place_from:
-        return place_to_candidate
-    else:
         return findRandomPlaceTo(place_from, destination_candidates)
+    else:
+        return place_to_candidate
 
 # SRP
 def removeAlreadyVisitedPlacesFromList(placesToRemove, places):

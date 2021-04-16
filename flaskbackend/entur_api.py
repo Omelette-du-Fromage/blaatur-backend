@@ -27,6 +27,12 @@ def journey_getter(place_from: str, place_to: str, startDate=datetime.now()) -> 
 
         response = api_requests.post(entur_journey_url, json=body, headers=safe_header)
         trip_json = response.json()
+
+        print(trip_json)
+        print(trip_json['data']['trip'])
+
+        if trip_json['data']['trip'] == None:
+            return None
         if not trip_json['data']['trip']['tripPatterns']:
             date_data = trip_json['data']['trip']['metadata']['nextDateTime']
             startDate = parser.parse(date_data)
