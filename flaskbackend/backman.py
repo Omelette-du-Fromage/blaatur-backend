@@ -31,17 +31,15 @@ def data():
     place_from = data_from_frontend.get("place_from", "")
     dest_blacklist: list = data_from_frontend.get("destinations_used", [])
     destination_candidates = removeAlreadyVisitedPlacesFromList(dest_blacklist, ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"])
+
+    # Handle no more trips left
+    if (len(destination_candidates) == 0):
+        return "Record not found", 400
+
     # # Removes place_from from candidates
     # destination_candidates = [x for x in destination_candidates if x not in place_from]
 
     print(f'Dests: {destination_candidates}')
-
-    # Checks if blacklist  == candiates
-    if all(dest in dest_blacklist for dest in destination_candidates):
-        dest_blacklist = []
-    # Create whitelist based on blacklist.
-    dest_whitelist = [dest for dest in destination_candidates if dest not in dest_blacklist]
-    print(f"Whitelist: {dest_whitelist}")
 
     place_to = findRandomPlaceTo(place_from, destination_candidates)
     # if not place_to: # I don't like this, Sam.
@@ -111,7 +109,6 @@ def removeAlreadyVisitedPlacesFromList(placesToRemove, places):
     placesToRemoveSet = set(placesToRemove)
     placesToGoSet = set(places)
     return list(placesToGoSet.difference(placesToRemoveSet))
-
 
 # def aaaa():
 #     # gets the "place" value from the HTTP body
