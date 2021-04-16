@@ -1,14 +1,12 @@
 from flaskbackend.backman import app
 import flaskbackend.backman as backman
 
-"""
-Why is this failing?
 def test_api_start():
     app.testing = True
     with app.test_client() as c:
-        rv = c.post("/testing",  json={"place_from": "Bergen", "destinations_used":[]}, headers={"Content-Type": "application/json"})
+        rv = c.post("/",  json={"place_from": "Bergen"}, headers={"Content-Type": "application/json"})
         assert rv is not None
-"""
+
 
 # def test_list_addition():
     # app.testing = True
