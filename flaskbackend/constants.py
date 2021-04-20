@@ -2,17 +2,14 @@ entur_journey_url = "https://api.entur.io/journey-planner/v3/graphql"
 
 entur_autocomp_url = "https://api.entur.io/geocoder/v1/autocomplete"
 
-entur_query = """{
+entur_query = """query($from: String!, $to: String!){
   trip(
-    from: {name: "Bjerkealleen 5A, Skedsmo"
-    coordinates: {
-      latitude: 59.96050414081307
-      longitude:11.040338686322317
-    }}
+    from: {
+        place: $from 
+    }
 
     to: {
-      place:"NSR:StopPlace:5532"
-      name:"Dyrløkke, Frogn"
+      place: $to
     }
     
     

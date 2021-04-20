@@ -18,6 +18,10 @@ def journey_getter(place_from: str, place_to: str, startDate=datetime.now()) -> 
     while True:
         body = {
             "query": entur_query,
+            "variables": {  
+                "from": place_from,
+                "to": place_to
+    }
         }
 
         response = api_requests.post(entur_journey_url, json=body, headers=safe_header)
