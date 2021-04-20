@@ -84,9 +84,9 @@ def dataMock():
     print(f'To: {id_and_station_name_place_to}')
 
     if id_and_station_name_place_from and id_and_station_name_place_to:
-        databack = entur_api.journey_getter(id_and_station_name_place_from['id'],
-                                            id_and_station_name_place_to['id'])
-        databack['name'] = id_and_station_name_place_to['name']
+        databack = entur_api.journey_getter(id_and_station_name_place_from,
+                                            id_and_station_name_place_to)
+        databack['name'] = id_and_station_name_place_to
         return databack
     else:
         return "Record not found", 400

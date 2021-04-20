@@ -2,53 +2,41 @@ entur_journey_url = "https://api.entur.io/journey-planner/v3/graphql"
 
 entur_autocomp_url = "https://api.entur.io/geocoder/v1/autocomplete"
 
-entur_query = """query JarleMann($tomann: String!, $frommann: String!, $startDate: DateTime){
+entur_query = """{
   trip(
-    modes: {
-      accessMode: foot
-      transportModes: [{transportMode: bus}, 
-        {transportMode: water},
-        {transportMode: rail},
-      	{transportMode: metro}
-      ]
+    from: {name: "Bjerkealleen 5A, Skedsmo"
+    coordinates: {
+      latitude: 59.96050414081307
+      longitude:11.040338686322317
+    }}
+
+    to: {
+      place:"NSR:StopPlace:5532"
+      name:"Dyrløkke, Frogn"
     }
     
-    from: {place: $frommann}
-    to: {place : $tomann}
-    dateTime: $startDate
     
-    
-    searchWindow: 400
-    numTripPatterns: 1
   )
 
 #### Requested fields
   {
-    metadata{
-        searchWindowUsed
-        nextDateTime
-    }
-    
     tripPatterns {
       startTime
       duration
+      walkDistance
+
           legs {
-            expectedStartTime
-            expectedEndTime
+          
             mode
-            fromPlace {
-              name
-            }
-            toPlace {
-              name
-            }
+            distance
             line {
+              id
+              publicCode
               authority{
                 name
               }
             }
           }
     }
-    debugOutput{totalTime}
   }
 }"""
