@@ -16,6 +16,9 @@ entur_query = """query($from: String!, $to: String!, $fromDate: DateTime!){
     from: {place: $frommann}
     to: {place : $tomann}
     dateTime: $startDate
+    
+    searchWindow: 400
+    numTripPatterns: 1
   )
 
 #### Requested fields
