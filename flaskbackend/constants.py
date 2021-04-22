@@ -22,23 +22,32 @@ entur_query = """query($from: String!, $to: String!, $startDate: DateTime!){
   )
 
 #### Requested fields
-  {
+{
+    metadata{
+        searchWindowUsed
+        nextDateTime
+    }
+    
     tripPatterns {
       expectedStartTime
       duration
-      walkDistance
           legs {
             expectedStartTime
+            expectedEndTime
             mode
-            distance
+            fromPlace {
+              name
+            }
+            toPlace {
+              name
+            }
             line {
-              id
-              publicCode
               authority{
                 name
               }
             }
           }
     }
+    debugOutput{totalTime}
   }
 }"""
