@@ -8,12 +8,12 @@ import requests as api_requests
 import random
 
 from flaskbackend import entur_api
-from flaskbackend.constants import entur_journey_url, entur_query
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-CORS(app)
+# CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
@@ -22,7 +22,9 @@ def home():
     return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for distant reading of science fiction novels.</p>"
 
 
+
 @app.route("/testing", methods=["POST"])
+@cross_origin()
 def data():
     # gets the "place" value from the HTTP body
     data_from_frontend = request.get_json()
