@@ -2,7 +2,7 @@ entur_journey_url = "https://api.entur.io/journey-planner/v3/graphql"
 
 entur_autocomp_url = "https://api.entur.io/geocoder/v1/autocomplete"
 
-entur_query = """query($from: String!, $to: String!, $fromDate: DateTime!){
+entur_query = """query($from: String!, $to: String!, $startDate: DateTime!){
   trip(
     modes: {
       accessMode: foot
@@ -27,9 +27,8 @@ entur_query = """query($from: String!, $to: String!, $fromDate: DateTime!){
       expectedStartTime
       duration
       walkDistance
-
           legs {
-          
+            expectedStartTime
             mode
             distance
             line {
