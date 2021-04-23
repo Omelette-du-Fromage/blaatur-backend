@@ -13,8 +13,8 @@ entur_query = """query($from: String!, $to: String!, $startDate: DateTime!){
       ]
     }
     
-    from: {place: $frommann}
-    to: {place : $tomann}
+    from: {place: $from}
+    to: {place : $to}
     dateTime: $startDate
     
     searchWindow: 400
