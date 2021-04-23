@@ -19,8 +19,8 @@ def journey_getter(place_from: str, place_to: str, startDate=datetime.now()) -> 
         body = {
             "query": entur_query,
             "variables": {
-                "frommann": place_from,
-                "tomann": place_to,
+                "from": place_from,
+                "to": place_to,
                 "dateTime": startDate.astimezone().replace(microsecond=0).isoformat()
             }
         }
