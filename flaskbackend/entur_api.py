@@ -35,9 +35,8 @@ def journey_getter(place_from: str, place_to: str, places_to_go, startDate=datet
         if trip_json['data']['trip'] == None:
             return None
         if not trip_json['data']['trip']['tripPatterns']:
-            #date_data = trip_json['data']['trip']['metadata']['nextDateTime']
-            #startDate = parser.parse(date_data)
             place_to = place_getter(backman.findRandomPlaceTo(place_from, places_to_go))
+            print("----- finding new place -------")
             print("--------"+ place_to + "--------")
         else:
             return trip_json
