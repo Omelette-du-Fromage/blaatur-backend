@@ -1,5 +1,6 @@
 import requests as api_requests
 import json
+from flaskbackend import backman
 from flaskbackend.constants import *
 from datetime import datetime
 from dateutil import parser
@@ -7,7 +8,7 @@ from dateutil import parser
 safe_header = {"ET-Client-Name": "blaatur-api", "Content-Type": "application/json"}
 
 
-def journey_getter(place_from: str, place_to: str, startDate=datetime.now()) -> dict:
+def journey_getter(place_from: str, place_to: str, places_to_go, startDate=datetime.now()) -> dict:
     """
     Uses EnTur's "journey planner" api to fetch a trip from place to place.
     Currently runs a while-loop with continous 400 minute search window API requests.
@@ -15,29 +16,31 @@ def journey_getter(place_from: str, place_to: str, startDate=datetime.now()) -> 
     :return:
     """
 
-    #while True:
-    body = {
-        "query": entur_query,
-        "variables": {
-            "from": place_from,
-            "to": place_to,
-            "dateTime": startDate.astimezone().replace(microsecond=0).isoformat()
+    while True:
+        body = {
+            "query": entur_query,
+            "variables": {
+                "from": place_from,
+                "to": place_to,
+                "dateTime": startDate.astimezone().replace(microsecond=0).isoformat()
+            }
         }
-    }
 
-    response = api_requests.post(entur_journey_url, json=body, headers=safe_header)
-    trip_json = response.json()
+        response = api_requests.post(entur_journey_url, json=body, headers=safe_header)
+        trip_json = response.json()
 
-    print(trip_json)
-    print(trip_json['data']['trip'])
+        print(trip_json)
+        print(trip_json['data']['trip'])
 
-    if trip_json['data']['trip'] == None:
-        return None
-    if not trip_json['data']['trip']['tripPatterns']:
-        date_data = trip_json['data']['trip']['metadata']['nextDateTime']
-        startDate = parser.parse(date_data)
-    else:
-        return trip_json
+        if trip_json['data']['trip'] == None:
+            return None
+        if not trip_json['data']['trip']['tripPatterns']:
+            #date_data = trip_json['data']['trip']['metadata']['nextDateTime']
+            #startDate = parser.parse(date_data)
+            place_to = place_getter(backman.findRandomPlaceTo(place_from, places_to_go))
+            print("--------"+ place_to + "--------")
+        else:
+            return trip_json
 
 
 def place_getter(name):
