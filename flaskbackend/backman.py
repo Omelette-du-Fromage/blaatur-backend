@@ -19,7 +19,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route("/", methods=["GET"])
 def home():
-    return "<h1>Empty page</h1><p>Try POSTing { "place_from": "Bergen", "destinations_used": [] } to /get_blaatur instead.</p>"
+    return "<h1>Empty page</h1><p>Try POSTing { \"place_from\": \"Bergen\", \"destinations_used\": [] } to /get_blaatur instead.</p>"
 
 
 
