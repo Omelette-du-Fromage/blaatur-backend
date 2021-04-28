@@ -33,17 +33,11 @@ def data():
     dest_blacklist: list = data_from_frontend.get("destinations_used", [])
     start_date = data_from_frontend.get("start_date", datetime.now())
 
-    # Converts string from json to a python datetime object
-    print("From JSON", start_date)
-  
+    # Converts string from json data to a python datetime object, if we got one in the request
     if type(start_date) == str:
         start_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S.%f")
 
     destination_candidates = removeAlreadyVisitedPlacesFromList(dest_blacklist, ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"])
-
-    print("#########################################")
-    print("Regular date:", datetime.now())
-    print("Our formatted date", start_date)
 
     # Handle no more trips left
     if (len(destination_candidates) == 0):

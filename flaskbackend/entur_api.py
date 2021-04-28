@@ -15,7 +15,6 @@ def journey_getter(place_from: str, place_to: str, places_to_go, startDate=datet
     :param place_to:
     :return:
     """
-    print("##########\nISO\n", startDate.astimezone().replace(microsecond=1).isoformat())
     while True:
         body = {
             "query": entur_query,
