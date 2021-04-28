@@ -54,7 +54,7 @@ def data():
     if id_place_from and id_place_to:
         entur_data = entur_api.journey_getter(id_place_from,
                                              id_place_to, destination_candidates,
-                                             startDate=)
+                                             startDate=start_date)
 
         if (entur_data == None):
             return "Record not found", 404
