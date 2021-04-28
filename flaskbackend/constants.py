@@ -2,7 +2,7 @@ entur_journey_url = "https://api.entur.io/journey-planner/v3/graphql"
 
 entur_autocomp_url = "https://api.entur.io/geocoder/v1/autocomplete"
 
-entur_query = """query EnturQuery($from: String!, $to: String!, $startDate: DateTime){
+entur_query = """query EnturQuery($from: String!, $to: String!, $startDate: DateTime!){
   trip(
     modes: {
       accessMode: foot
