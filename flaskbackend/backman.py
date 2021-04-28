@@ -19,11 +19,11 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route("/", methods=["GET"])
 def home():
-    return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for distant reading of science fiction novels.</p>"
+    return "<h1>Empty page</h1><p>Try POSTing { "place_from": "Bergen", "destinations_used": [] } to /get_blaatur instead.</p>"
 
 
 
-@app.route("/testing", methods=["POST"])
+@app.route("/get_blaatur", methods=["POST"])
 @cross_origin()
 def data():
     # gets the "place" value from the HTTP body
@@ -31,6 +31,7 @@ def data():
 
     place_from = data_from_frontend.get("place_from", "")
     dest_blacklist: list = data_from_frontend.get("destinations_used", [])
+    start_date = data_from_frontend.get("start_date", datetime.now())
     destination_candidates = removeAlreadyVisitedPlacesFromList(dest_blacklist, ["Bergen", "Florø", "Arendal", "Voss", "Indre Arna", "Asker"])
 
     # Handle no more trips left
@@ -52,7 +53,8 @@ def data():
 
     if id_place_from and id_place_to:
         entur_data = entur_api.journey_getter(id_place_from,
-                                            id_place_to, destination_candidates)
+                                             id_place_to, destination_candidates,
+                                             startDate=)
 
         if (entur_data == None):
             return "Record not found", 404
